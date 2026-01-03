@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Builder - Przykład</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="../dist/email-builder.min.js"></script>
+  <link rel="stylesheet" href="../dist/email-builder.min.css">
+</head>
+<body>
+  <div id="email-builder-container"></div>
+
+  <script>
+    $(document).ready(function() {
+      // Inicjalizacja buildera
+      const builder = new EmailBuilder('#email-builder-container');
+      
+      // Przykład użycia API
+      console.log('Email Builder zainicjalizowany:', builder);
+    });
+  </script>
+</body>
+</html>
+

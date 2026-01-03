@@ -1,0 +1,37 @@
+{
+  "name": "email-builder",
+  "version": "1.0.0",
+  "description": "Block-based email template builder compatible with jQuery v3",
+  "main": "dist/email-builder.min.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch",
+    "serve": "webpack serve --mode development"
+  },
+  "keywords": [
+    "email",
+    "builder",
+    "template",
+    "jquery",
+    "wysiwyg"
+  ],
+  "author": "Jakub Rejch - Web Developer",
+  "license": "PROPRIETARY",
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "babel-loader": "^9.1.3",
+    "css-loader": "^6.8.1",
+    "html-loader": "^4.2.0",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1",
+    "terser-webpack-plugin": "^5.3.9",
+    "mini-css-extract-plugin": "^2.7.6"
+  },
+  "peerDependencies": {
+    "jquery": "^3.0.0"
+  }
+}
+

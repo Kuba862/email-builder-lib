@@ -1,0 +1,252 @@
+.email-builder-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.email-builder-toolbar {
+  background: #2c3e50;
+  padding: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.email-builder-toolbar button {
+  padding: 8px 16px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.email-builder-toolbar button:hover {
+  background: #2980b9;
+}
+
+.email-builder-toolbar .btn-export-json,
+.email-builder-toolbar .btn-export-html {
+  background: #27ae60;
+}
+
+.email-builder-toolbar .btn-export-json:hover,
+.email-builder-toolbar .btn-export-html:hover {
+  background: #229954;
+}
+
+.email-builder-toolbar .btn-import-json {
+  background: #e67e22;
+}
+
+.email-builder-toolbar .btn-import-json:hover {
+  background: #d35400;
+}
+
+.email-builder-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.email-builder-canvas {
+  flex: 1;
+  overflow-y: auto;
+  background: #ecf0f1;
+  padding: 20px;
+}
+
+.email-builder-preview {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  min-height: 400px;
+}
+
+.email-builder-sidebar {
+  width: 300px;
+  background: white;
+  border-left: 1px solid #ddd;
+  overflow-y: auto;
+  box-shadow: -2px 0 4px rgba(0,0,0,0.05);
+}
+
+.sidebar-content {
+  padding: 20px;
+}
+
+.sidebar-content h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 18px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 8px;
+}
+
+.sidebar-section {
+  margin-bottom: 20px;
+}
+
+.sidebar-section label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #34495e;
+  font-size: 14px;
+}
+
+.sidebar-section input[type="text"],
+.sidebar-section input[type="number"],
+.sidebar-section input[type="color"],
+.sidebar-section textarea,
+.sidebar-section select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.sidebar-section textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.sidebar-section input[type="color"] {
+  height: 40px;
+  cursor: pointer;
+}
+
+/* Block styles */
+.block-wrapper {
+  position: relative;
+  margin: 4px 0;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.block-wrapper:hover {
+  border-color: #3498db;
+}
+
+.block-wrapper.selected {
+  border-color: #2980b9;
+  background: #ebf5fb;
+}
+
+.block-controls {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  display: none;
+  gap: 4px;
+  z-index: 10;
+}
+
+.block-wrapper:hover .block-controls,
+.block-wrapper.selected .block-controls {
+  display: flex;
+}
+
+.block-controls button {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.block-controls button:hover {
+  background: #34495e;
+}
+
+.block-controls .block-delete {
+  background: #e74c3c;
+}
+
+.block-controls .block-delete:hover {
+  background: #c0392b;
+}
+
+.block-text,
+.block-heading,
+.block-image,
+.block-button,
+.block-divider,
+.block-spacer,
+.block-columns {
+  position: relative;
+}
+
+.block-text {
+  line-height: 1.6;
+}
+
+.block-heading {
+  margin: 0;
+}
+
+.block-heading h1,
+.block-heading h2,
+.block-heading h3,
+.block-heading h4 {
+  margin: 0;
+}
+
+.block-image img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.block-button a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.block-divider hr {
+  margin: 0;
+}
+
+/* Email preview styles */
+#email-preview {
+  padding: 20px;
+}
+
+#email-preview p {
+  margin: 0;
+}
+
+#email-preview h1,
+#email-preview h2,
+#email-preview h3,
+#email-preview h4 {
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .email-builder-content {
+    flex-direction: column;
+  }
+
+  .email-builder-sidebar {
+    width: 100%;
+    max-height: 300px;
+  }
+}
+

@@ -1,0 +1,8 @@
+node_modules/
+src/
+examples/
+.gitignore
+.babelrc
+webpack.config.js
+*.log
+
