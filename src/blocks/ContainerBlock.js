@@ -17,10 +17,32 @@ export class ContainerBlock extends BaseBlock {
     const blockId = this.data.blockId || '';
     const isPreview = blockId && blockId !== 'root';
     
+    // Email-compatible table-based layout
+    const containerContent = `
+      <table style="width: 100%; border-collapse: collapse; background-color: ${this.data.style?.backgroundColor || '#FFFFFF'};">
+        <tr>
+          <td style="${style}">
+            <div class="container-children" data-container-id="${blockId}">
+              {{children}}
+            </div>
+          </td>
+        </tr>
+      </table>
+    `;
+    
     if (isPreview) {
-      return `<div class="block-container" data-block-id="${blockId}" style="${style}">{{children}}</div>`;
+      return `
+        <div class="block-wrapper" data-block-id="${blockId}">
+          <div class="block-controls">
+            <button class="block-move-up">↑</button>
+            <button class="block-move-down">↓</button>
+            <button class="block-delete">×</button>
+          </div>
+          <div class="block-container">${containerContent}</div>
+        </div>
+      `;
     } else {
-      return `<div class="block-container" style="${style}">{{children}}</div>`;
+      return `<div class="block-container">${containerContent}</div>`;
     }
   }
 

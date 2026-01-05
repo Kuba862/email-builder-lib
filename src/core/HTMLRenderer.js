@@ -25,8 +25,43 @@ export class HTMLRenderer {
     const blockInstance = new BlockClass(blockData);
     let html = blockInstance.render();
 
-    // Render children if they exist
-    if (block.data && block.data.childrenIds && Array.isArray(block.data.childrenIds)) {
+    // Special handling for Columns block - render children in columns
+    if (block.type === 'Columns') {
+      // Upewnij się, że props istnieje
+      if (!block.data.props) {
+        block.data.props = { columns: 2 };
+      }
+      
+      const columns = parseInt(block.data.props.columns) || 2;
+      
+      // Upewnij się, że columnChildrenIds ma odpowiednią liczbę kolumn
+      if (!block.data.columnChildrenIds || block.data.columnChildrenIds.length !== columns) {
+        const existingColumnChildrenIds = block.data.columnChildrenIds || [];
+        block.data.columnChildrenIds = Array(columns).fill(null).map((_, i) => {
+          return existingColumnChildrenIds[i] || [];
+        });
+      }
+      
+      const columnChildrenIds = block.data.columnChildrenIds || [];
+      
+      // Render children for each column
+      for (let i = 0; i < columns; i++) {
+        const columnChildren = columnChildrenIds[i] || [];
+        const childrenHtml = columnChildren
+          .map(childId => {
+            const childBlock = document[childId];
+            if (childBlock) {
+              return this.renderBlock(childBlock, document);
+            }
+            return '';
+          })
+          .join('');
+        
+        html = html.replace(`{{column-${i}-children}}`, childrenHtml);
+      }
+    }
+    // Render children if they exist (for Container and other blocks)
+    else if (block.data && block.data.childrenIds && Array.isArray(block.data.childrenIds)) {
       const childrenHtml = block.data.childrenIds
         .map(childId => {
           const childBlock = document[childId];
