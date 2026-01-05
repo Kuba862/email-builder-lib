@@ -3,7 +3,7 @@ import { EmailBuilder } from './core/EmailBuilder';
 import { BlockRegistry } from './core/BlockRegistry';
 import { HTMLRenderer } from './core/HTMLRenderer';
 
-// Rejestracja podstawowych bloków
+// Registration of basic blocks
 import { ContainerBlock } from './blocks/ContainerBlock';
 import { TextBlock } from './blocks/TextBlock';
 import { HeadingBlock } from './blocks/HeadingBlock';
@@ -13,7 +13,7 @@ import { DividerBlock } from './blocks/DividerBlock';
 import { SpacerBlock } from './blocks/SpacerBlock';
 import { ColumnsBlock } from './blocks/ColumnsBlock';
 
-// Rejestracja bloków
+// Registration of blocks
 BlockRegistry.register('Container', ContainerBlock);
 BlockRegistry.register('Text', TextBlock);
 BlockRegistry.register('Heading', HeadingBlock);
@@ -23,8 +23,8 @@ BlockRegistry.register('Divider', DividerBlock);
 BlockRegistry.register('Spacer', SpacerBlock);
 BlockRegistry.register('Columns', ColumnsBlock);
 
-// Eksport dla globalnego użycia (gdy biblioteka jest załadowana przez <script>)
-// To jest najważniejsze - ustawiamy EmailBuilder jako globalną zmienną
+// Export for global usage (when library is loaded by <script>)
+// This is the most important - we set EmailBuilder as a global variable
 if (typeof window !== 'undefined') {
   window.EmailBuilder = EmailBuilder;
   window.EmailBuilderCore = {
@@ -33,7 +33,7 @@ if (typeof window !== 'undefined') {
   };
 }
 
-// Eksport dla CommonJS
+// Export for CommonJS
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = EmailBuilder;
   module.exports.EmailBuilder = EmailBuilder;
@@ -41,7 +41,7 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports.HTMLRenderer = HTMLRenderer;
 }
 
-// Eksport dla ES6 modules
+// Export for ES6 modules
 export default EmailBuilder;
 export { EmailBuilder, BlockRegistry, HTMLRenderer };
 

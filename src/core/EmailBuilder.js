@@ -42,20 +42,20 @@ export class EmailBuilder {
     const $container = $(this.container);
     $container.empty();
 
-    // Główny layout
+    // Main layout
     $container.html(`
       <div class="email-builder-wrapper">
         <div class="email-builder-toolbar">
-          <button class="btn-add-block" data-type="Text">Dodaj Tekst</button>
-          <button class="btn-add-block" data-type="Heading">Dodaj Nagłówek</button>
-          <button class="btn-add-block" data-type="Image">Dodaj Obraz</button>
-          <button class="btn-add-block" data-type="Button">Dodaj Przycisk</button>
-          <button class="btn-add-block" data-type="Divider">Dodaj Separator</button>
-          <button class="btn-add-block" data-type="Spacer">Dodaj Odstęp</button>
-          <button class="btn-add-block" data-type="Columns">Dodaj Kolumny</button>
-          <button class="btn-export-json">Eksportuj JSON</button>
-          <button class="btn-export-html">Eksportuj HTML</button>
-          <button class="btn-import-json">Importuj JSON</button>
+          <button class="btn-add-block" data-type="Text">Add Text</button>
+          <button class="btn-add-block" data-type="Heading">Add Heading</button>
+          <button class="btn-add-block" data-type="Image">Add Image</button>
+          <button class="btn-add-block" data-type="Button">Add Button</button>
+          <button class="btn-add-block" data-type="Divider">Add Divider</button>
+          <button class="btn-add-block" data-type="Spacer">Add Spacer</button>
+          <button class="btn-add-block" data-type="Columns">Add Columns</button>
+          <button class="btn-export-json">Export JSON</button>
+          <button class="btn-export-html">Export HTML</button>
+          <button class="btn-import-json">Import JSON</button>
         </div>
         <div class="email-builder-content">
           <div class="email-builder-canvas">
@@ -63,7 +63,7 @@ export class EmailBuilder {
           </div>
           <div class="email-builder-sidebar">
             <div class="sidebar-content" id="sidebar-content">
-              <p>Wybierz blok aby edytować</p>
+              <p>Select a block to edit</p>
             </div>
           </div>
         </div>
@@ -87,12 +87,12 @@ export class EmailBuilder {
     const BlockClass = BlockRegistry.get(block.type);
     if (!BlockClass) return '';
 
-    // Dodaj blockId do danych bloku
+    // Add blockId to block data
     const blockData = { ...block.data, blockId: blockId };
     const blockInstance = new BlockClass(blockData);
     let html = blockInstance.render();
 
-    // Renderuj dzieci jeśli istnieją
+    // Render children if they exist
     if (block.data && block.data.childrenIds && Array.isArray(block.data.childrenIds)) {
       const childrenHtml = block.data.childrenIds
         .map(childId => this.renderPreviewBlocks(document, childId))
@@ -107,23 +107,23 @@ export class EmailBuilder {
   attachEvents() {
     const self = this;
 
-    // Dodawanie bloków
+    // Adding blocks
     $(this.container).on('click', '.btn-add-block', function() {
       const type = $(this).data('type');
       self.addBlock(type);
     });
 
-    // Eksport JSON
+    // Export JSON
     $(this.container).on('click', '.btn-export-json', function() {
       self.exportJSON();
     });
 
-    // Eksport HTML
+    // Export HTML
     $(this.container).on('click', '.btn-export-html', function() {
       self.exportHTML();
     });
 
-    // Import JSON
+    // Import JSON from file
     $(this.container).on('click', '.btn-import-json', function() {
       self.importJSON();
     });
@@ -133,21 +133,21 @@ export class EmailBuilder {
     const self = this;
     const $preview = $('#email-preview');
 
-    // Kliknięcie na blok
+    // Click on a block
     $preview.find('[data-block-id]').off('click').on('click', function(e) {
       e.stopPropagation();
       const blockId = $(this).data('block-id');
       self.selectBlock(blockId);
     });
 
-    // Przyciski usuwania
+    // Delete buttons
     $preview.find('.block-delete').off('click').on('click', function(e) {
       e.stopPropagation();
       const blockId = $(this).closest('[data-block-id]').data('block-id');
       self.deleteBlock(blockId);
     });
 
-    // Przyciski przenoszenia
+    // Move buttons
     $preview.find('.block-move-up').off('click').on('click', function(e) {
       e.stopPropagation();
       const blockId = $(this).closest('[data-block-id]').data('block-id');
@@ -196,7 +196,7 @@ export class EmailBuilder {
 
     this.renderSidebar(blockId, block);
     
-    // Wizualne zaznaczenie
+    // Visual selection
     $('#email-preview').find('[data-block-id]').removeClass('selected');
     $('#email-preview').find(`[data-block-id="${blockId}"]`).addClass('selected');
   }
@@ -210,7 +210,7 @@ export class EmailBuilder {
     
     $sidebar.html(html);
     
-    // Podpięcie eventów
+    // Attach events
     this.attachSidebarEvents(blockId);
   }
 
@@ -218,7 +218,7 @@ export class EmailBuilder {
     const self = this;
     const $sidebar = $('#sidebar-content');
 
-    // Wszystkie inputy i textarea
+    // All inputs and textarea
     $sidebar.find('input, textarea, select').on('change input', function() {
       const $field = $(this);
       const fieldName = $field.data('field');
@@ -231,7 +231,7 @@ export class EmailBuilder {
       } else if (fieldType === 'boolean') {
         value = $field.is(':checked');
       } else if (fieldType === 'object') {
-        // Dla stylów i innych obiektów
+        // For styles and other objects
         const path = fieldName.split('.');
         if (path.length === 2) {
           if (!self.document[blockId].data[path[0]]) {
@@ -258,10 +258,10 @@ export class EmailBuilder {
   }
 
   deleteBlock(blockId) {
-    if (confirm('Czy na pewno chcesz usunąć ten blok?')) {
+    if (confirm('Are you sure you want to delete this block?')) {
       delete this.document[blockId];
       
-      // Usuń z childrenIds wszystkich rodziców
+      // Remove from childrenIds of all parents
       Object.keys(this.document).forEach(key => {
         const block = this.document[key];
         if (block.data && block.data.childrenIds) {
@@ -270,7 +270,7 @@ export class EmailBuilder {
       });
 
       this.selectedBlockId = null;
-      $('#sidebar-content').html('<p>Wybierz blok aby edytować</p>');
+      $('#sidebar-content').html('<p>Select a block to edit</p>');
       this.renderPreview();
     }
   }
@@ -333,9 +333,9 @@ export class EmailBuilder {
           try {
             this.document = JSON.parse(event.target.result);
             this.renderPreview();
-            alert('Szablon zaimportowany pomyślnie!');
+            alert('Template imported successfully!');
           } catch (error) {
-            alert('Błąd podczas importowania: ' + error.message);
+            alert('Error importing template: ' + error.message);
           }
         };
         reader.readAsText(file);

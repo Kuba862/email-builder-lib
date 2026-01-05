@@ -8,7 +8,7 @@ export class ButtonBlock extends BaseBlock {
         textAlign: 'center'
       },
       props: {
-        text: 'Kliknij tutaj',
+        text: 'Click here',
         link: 'https://example.com',
         backgroundColor: '#007bff',
         textColor: '#FFFFFF',
@@ -59,35 +59,35 @@ export class ButtonBlock extends BaseBlock {
   static getSidebarHTML(data) {
     return `
       <div class="sidebar-section">
-        <label>Tekst przycisku:</label>
+        <label>Button text:</label>
         <input type="text" data-field="props.text" value="${data.props?.text || ''}">
       </div>
       <div class="sidebar-section">
-        <label>Link:</label>
+        <label>Link URL:</label>
         <input type="text" data-field="props.link" value="${data.props?.link || ''}" placeholder="https://...">
       </div>
       <div class="sidebar-section">
-        <label>Kolor tła:</label>
+        <label>Background color:</label>
         <input type="color" data-field="props.backgroundColor" value="${data.props?.backgroundColor || '#007bff'}">
       </div>
       <div class="sidebar-section">
-        <label>Kolor tekstu:</label>
+        <label>Text color:</label>
         <input type="color" data-field="props.textColor" value="${data.props?.textColor || '#FFFFFF'}">
       </div>
       <div class="sidebar-section">
-        <label>Padding:</label>
+        <label>Padding (px):</label>
         <input type="number" data-field="props.padding" value="${data.props?.padding || 12}">
       </div>
       <div class="sidebar-section">
-        <label>Zaokrąglenie rogów:</label>
+        <label>Border radius (px):</label>
         <input type="number" data-field="props.borderRadius" value="${data.props?.borderRadius || 4}">
       </div>
       <div class="sidebar-section">
-        <label>Wyrównanie:</label>
+        <label>Text alignment:</label>
         <select data-field="style.textAlign">
-          <option value="left" ${data.style?.textAlign === 'left' ? 'selected' : ''}>Lewo</option>
-          <option value="center" ${data.style?.textAlign === 'center' ? 'selected' : ''}>Środek</option>
-          <option value="right" ${data.style?.textAlign === 'right' ? 'selected' : ''}>Prawo</option>
+          <option value="left" ${data.style?.textAlign === 'left' ? 'selected' : ''}>Left</option>
+          <option value="center" ${data.style?.textAlign === 'center' ? 'selected' : ''}>Center</option>
+          <option value="right" ${data.style?.textAlign === 'right' ? 'selected' : ''}>Right</option>
         </select>
       </div>
     `;

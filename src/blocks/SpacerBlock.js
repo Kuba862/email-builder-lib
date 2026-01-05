@@ -36,7 +36,7 @@ export class SpacerBlock extends BaseBlock {
   static getSidebarHTML(data) {
     return `
       <div class="sidebar-section">
-        <label>Wysokość (px):</label>
+        <label>Height (px):</label>
         <input type="number" data-field="props.height" value="${data.props?.height || 20}" min="0">
       </div>
     `;

@@ -1,47 +1,47 @@
-# Instrukcja instalacji i budowania
+# Installation and Build Instructions
 
-## Wymagania
+## Requirements
 
-- Node.js (v14 lub nowszy)
-- npm lub yarn
+- Node.js (v14 or newer)
+- npm or yarn
 
-## Instalacja zależności
+## Installing Dependencies
 
 ```bash
 npm install
 ```
 
-## Budowanie biblioteki
+## Building the Library
 
-### Build produkcyjny (minifikowany)
+### Production Build (minified)
 
 ```bash
 npm run build
 ```
 
-To wygeneruje:
-- `dist/email-builder.min.js` - minifikowany plik JavaScript
-- `dist/email-builder.min.css` - minifikowany plik CSS
+This will generate:
+- `dist/email-builder.min.js` - minified JavaScript file
+- `dist/email-builder.min.css` - minified CSS file
 
-### Build deweloperski
+### Development Build
 
 ```bash
 npm run dev
 ```
 
-To uruchomi webpack w trybie watch, który będzie automatycznie przebudowywał pliki przy zmianach.
+This will run webpack in watch mode, which will automatically rebuild files on changes.
 
-### Serwer deweloperski
+### Development Server
 
 ```bash
 npm run serve
 ```
 
-To uruchomi webpack-dev-server na porcie 8080 z automatycznym odświeżaniem.
+This will start webpack-dev-server on port 8080 with automatic hot reloading.
 
-## Użycie w projekcie
+## Usage in Your Project
 
-Po zbudowaniu biblioteki, skopiuj pliki z katalogu `dist/` do swojego projektu:
+After building the library, copy the files from the `dist/` directory to your project:
 
 ```html
 <!DOCTYPE html>
@@ -62,17 +62,17 @@ Po zbudowaniu biblioteki, skopiuj pliki z katalogu `dist/` do swojego projektu:
 </html>
 ```
 
-## Struktura projektu
+## Project Structure
 
 ```
 builder/
-├── src/              # Kod źródłowy
-│   ├── blocks/       # Definicje bloków
-│   ├── core/         # Rdzeń biblioteki
-│   └── styles/       # Style CSS
-├── dist/             # Zbudowane pliki (generowane)
-├── examples/         # Przykłady użycia
-├── package.json      # Konfiguracja npm
-└── webpack.config.js # Konfiguracja buildowania
+├── src/              # Source code
+│   ├── blocks/       # Block definitions
+│   ├── core/         # Library core
+│   └── styles/       # CSS styles
+├── dist/             # Built files (generated)
+├── examples/         # Usage examples
+├── package.json      # npm configuration
+└── webpack.config.js # Build configuration
 ```
 

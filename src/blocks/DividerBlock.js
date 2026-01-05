@@ -50,16 +50,16 @@ export class DividerBlock extends BaseBlock {
   static getSidebarHTML(data) {
     return `
       <div class="sidebar-section">
-        <label>Kolor:</label>
+        <label>Color:</label>
         <input type="color" data-field="props.color" value="${data.props?.color || '#E0E0E0'}">
       </div>
       <div class="sidebar-section">
-        <label>Grubość:</label>
+        <label>Height (px):</label>
         <input type="number" data-field="props.height" value="${data.props?.height || 1}" min="1" max="10">
       </div>
       <div class="sidebar-section">
-        <label>Szerokość:</label>
-        <input type="text" data-field="props.width" value="${data.props?.width || '100%'}" placeholder="100% lub 300px">
+        <label>Width:</label>
+        <input type="text" data-field="props.width" value="${data.props?.width || '100%'}" placeholder="100% or 300px">
       </div>
     `;
   }

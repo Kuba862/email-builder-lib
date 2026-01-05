@@ -24,14 +24,14 @@ export class ColumnsBlock extends BaseBlock {
     const gap = props.gap || 16;
     const isPreview = blockId && blockId !== 'root';
     
-    // Renderuj kolumny - w emailach używamy tabeli
+    // Render columns - in emails we use table
     let columnsHtml = '';
     for (let i = 0; i < columns; i++) {
       const width = columnWidths[i] || `${100 / columns}%`;
       columnsHtml += `
         <td style="width: ${width}; padding: 0 ${gap / 2}px; vertical-align: top;">
           <div class="column-content" data-column-index="${i}">
-            <!-- Kolumna ${i + 1} -->
+            <!-- Column ${i + 1} -->
           </div>
         </td>
       `;
@@ -64,14 +64,14 @@ export class ColumnsBlock extends BaseBlock {
   static getSidebarHTML(data) {
     return `
       <div class="sidebar-section">
-        <label>Liczba kolumn:</label>
+        <label>Number of columns:</label>
         <select data-field="props.columns">
           <option value="2" ${data.props?.columns === 2 ? 'selected' : ''}>2</option>
           <option value="3" ${data.props?.columns === 3 ? 'selected' : ''}>3</option>
         </select>
       </div>
       <div class="sidebar-section">
-        <label>Odstęp między kolumnami (px):</label>
+        <label>Gap between columns (px):</label>
         <input type="number" data-field="props.gap" value="${data.props?.gap || 16}" min="0">
       </div>
     `;

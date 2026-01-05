@@ -7,7 +7,7 @@ export class HTMLRenderer {
     }
 
     const rootBlock = document[rootBlockId];
-    // Nie przekazuj blockId - to finalne renderowanie bez kontrolek
+    // Do not pass blockId - this is final rendering without controls
     return this.renderBlock(rootBlock, document);
   }
 
@@ -18,27 +18,27 @@ export class HTMLRenderer {
       return '';
     }
 
-    // Nie przekazuj blockId dla finalnego renderowania HTML (tylko dla preview)
+    // Do not pass blockId for final HTML rendering (only for preview)
     const blockData = { ...block.data };
-    // blockId nie jest przekazywane, więc bloki nie będą renderować kontrolek
+    // blockId is not passed, so blocks will not render controls
 
     const blockInstance = new BlockClass(blockData);
     let html = blockInstance.render();
 
-    // Renderuj dzieci jeśli istnieją
+    // Render children if they exist
     if (block.data && block.data.childrenIds && Array.isArray(block.data.childrenIds)) {
       const childrenHtml = block.data.childrenIds
         .map(childId => {
           const childBlock = document[childId];
           if (childBlock) {
-            // Nie przekazuj blockId - to finalne renderowanie
+            // Do not pass blockId - this is final rendering
             return this.renderBlock(childBlock, document);
           }
           return '';
         })
         .join('');
 
-      // Wstaw dzieci do HTML bloku
+      // Insert children into HTML block
       html = html.replace('{{children}}', childrenHtml);
     }
 
@@ -53,7 +53,7 @@ export class HTMLRenderer {
       throw new Error(`Root block "${rootBlockId}" not found`);
     }
 
-    // Pobierz style z root block jeśli istnieją
+    // Get styles from root block if they exist
     const styles = this.getStyles(rootBlock.data || {});
 
     const body = this.render(document, rootBlockId);
@@ -88,7 +88,7 @@ export class HTMLRenderer {
   }
 
   static getStyles(data) {
-    // Podstawowe style dla emaili
+    // Basic styles for emails
     return `
     * {
       box-sizing: border-box;

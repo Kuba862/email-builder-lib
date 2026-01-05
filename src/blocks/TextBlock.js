@@ -10,7 +10,7 @@ export class TextBlock extends BaseBlock {
         textAlign: 'left'
       },
       props: {
-        text: 'Wpisz swój tekst tutaj...'
+        text: 'Enter your text here...'
       }
     };
   }
@@ -39,31 +39,31 @@ export class TextBlock extends BaseBlock {
   static getSidebarHTML(data) {
     return `
       <div class="sidebar-section">
-        <label>Tekst:</label>
+        <label>Text:</label>
         <textarea data-field="props.text" rows="4">${data.props?.text || ''}</textarea>
       </div>
       <div class="sidebar-section">
-        <label>Rozmiar czcionki:</label>
+        <label>Font size:</label>
         <input type="number" data-field="style.fontSize" value="${data.style?.fontSize || 14}">
       </div>
       <div class="sidebar-section">
-        <label>Kolor tekstu:</label>
+        <label>Text color:</label>
         <input type="color" data-field="style.color" value="${data.style?.color || '#242424'}">
       </div>
       <div class="sidebar-section">
-        <label>Wyrównanie:</label>
+        <label>Text alignment:</label>
         <select data-field="style.textAlign">
-          <option value="left" ${data.style?.textAlign === 'left' ? 'selected' : ''}>Lewo</option>
-          <option value="center" ${data.style?.textAlign === 'center' ? 'selected' : ''}>Środek</option>
-          <option value="right" ${data.style?.textAlign === 'right' ? 'selected' : ''}>Prawo</option>
+          <option value="left" ${data.style?.textAlign === 'left' ? 'selected' : ''}>Left</option>
+          <option value="center" ${data.style?.textAlign === 'center' ? 'selected' : ''}>Center</option>
+          <option value="right" ${data.style?.textAlign === 'right' ? 'selected' : ''}>Right</option>
         </select>
       </div>
       <div class="sidebar-section">
-        <label>Padding Top:</label>
+        <label>Padding top (px):</label>
         <input type="number" data-field="style.padding.top" data-type="object" value="${data.style?.padding?.top || 8}">
       </div>
       <div class="sidebar-section">
-        <label>Padding Bottom:</label>
+        <label>Padding bottom (px):</label>
         <input type="number" data-field="style.padding.bottom" data-type="object" value="${data.style?.padding?.bottom || 8}">
       </div>
     `;

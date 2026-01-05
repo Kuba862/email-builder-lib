@@ -74,7 +74,10 @@ module.exports = (env, argv) => {
         directory: path.join(__dirname, 'examples'),
       },
       port: 8080,
-      open: true
+      open: true,
+      devMiddleware: {
+        publicPath: '/'
+      }
     }
   };
 };

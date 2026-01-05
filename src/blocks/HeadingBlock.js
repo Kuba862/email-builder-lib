@@ -11,7 +11,7 @@ export class HeadingBlock extends BaseBlock {
         textAlign: 'left'
       },
       props: {
-        text: 'Nagłówek',
+        text: 'Heading',
         level: 'h1'
       }
     };
@@ -43,11 +43,11 @@ export class HeadingBlock extends BaseBlock {
   static getSidebarHTML(data) {
     return `
       <div class="sidebar-section">
-        <label>Tekst:</label>
+        <label>Text:</label>
         <input type="text" data-field="props.text" value="${data.props?.text || ''}">
       </div>
       <div class="sidebar-section">
-        <label>Poziom:</label>
+        <label>Level:</label>
         <select data-field="props.level">
           <option value="h1" ${data.props?.level === 'h1' ? 'selected' : ''}>H1</option>
           <option value="h2" ${data.props?.level === 'h2' ? 'selected' : ''}>H2</option>
@@ -56,19 +56,19 @@ export class HeadingBlock extends BaseBlock {
         </select>
       </div>
       <div class="sidebar-section">
-        <label>Rozmiar czcionki:</label>
+        <label>Font size:</label>
         <input type="number" data-field="style.fontSize" value="${data.style?.fontSize || 24}">
       </div>
       <div class="sidebar-section">
-        <label>Kolor tekstu:</label>
+        <label>Text color:</label>
         <input type="color" data-field="style.color" value="${data.style?.color || '#242424'}">
       </div>
       <div class="sidebar-section">
-        <label>Wyrównanie:</label>
+        <label>Text alignment:</label>
         <select data-field="style.textAlign">
-          <option value="left" ${data.style?.textAlign === 'left' ? 'selected' : ''}>Lewo</option>
-          <option value="center" ${data.style?.textAlign === 'center' ? 'selected' : ''}>Środek</option>
-          <option value="right" ${data.style?.textAlign === 'right' ? 'selected' : ''}>Prawo</option>
+          <option value="left" ${data.style?.textAlign === 'left' ? 'selected' : ''}>Left</option>
+          <option value="center" ${data.style?.textAlign === 'center' ? 'selected' : ''}>Center</option>
+          <option value="right" ${data.style?.textAlign === 'right' ? 'selected' : ''}>Right</option>
         </select>
       </div>
     `;
