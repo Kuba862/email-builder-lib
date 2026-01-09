@@ -61,6 +61,38 @@ export class EventHandler {
       e.preventDefault();
       alert('Quick tour feature coming soon!');
     });
+
+    // Email Preview
+    $(this.container).on('click', '#btn-preview-email', function(e) {
+      e.preventDefault();
+      self.openEmailPreview();
+    });
+
+    $(this.container).on('click', '#btn-preview-close, #btn-preview-close-footer', function(e) {
+      e.preventDefault();
+      self.closeEmailPreview();
+    });
+
+    // Preview Controls
+    $(this.container).on('change', '#preview-browser', function() {
+      const browser = $(this).val();
+      self.emailPreviewManager.setBrowser(browser);
+    });
+
+    $(this.container).on('change', '#preview-device', function() {
+      const device = $(this).val();
+      self.emailPreviewManager.setDevice(device);
+    });
+
+    $(this.container).on('change', '#preview-client', function() {
+      const client = $(this).val();
+      self.emailPreviewManager.setClient(client);
+    });
+
+    $(this.container).on('click', '#btn-preview-refresh', function(e) {
+      e.preventDefault();
+      self.emailPreviewManager.refreshPreview();
+    });
   }
 }
 

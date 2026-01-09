@@ -11,6 +11,7 @@ import { BlockManager } from '../utils/EmailBuilderUtils/BlockManager';
 import { SidebarManager } from '../utils/EmailBuilderUtils/SidebarManager';
 import { BlockEventsManager } from '../utils/EmailBuilderUtils/BlockEventsManager';
 import { ExportManager } from '../utils/EmailBuilderUtils/ExportManager';
+import { EmailPreviewManager } from '../utils/EmailBuilderUtils/EmailPreviewManager';
 
 export class EmailBuilder {
   /**
@@ -64,6 +65,7 @@ export class EmailBuilder {
     this.sidebarManager = new SidebarManager(this);
     this.blockEventsManager = new BlockEventsManager(this);
     this.exportManager = new ExportManager(this);
+    this.emailPreviewManager = new EmailPreviewManager(this);
     this.init();
   }
 
@@ -294,6 +296,20 @@ export class EmailBuilder {
   setDocument(document) {
     this.document = document;
     this.renderPreview();
+  }
+
+  /**
+   * Otwiera modal z podglądem finalnego HTML emaila.
+   */
+  openEmailPreview() {
+    this.emailPreviewManager.openPreview();
+  }
+
+  /**
+   * Zamyka modal z podglądem emaila.
+   */
+  closeEmailPreview() {
+    this.emailPreviewManager.closePreview();
   }
 }
 

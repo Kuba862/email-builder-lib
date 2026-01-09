@@ -1,3 +1,5 @@
+import { createEmailPreviewModalHTML } from './EmailPreviewModal';
+
 export function createEmailBuilderLayoutHTML(options, activeTab) {
   return `
       <div class="email-builder-wrapper">
@@ -10,7 +12,7 @@ export function createEmailBuilderLayoutHTML(options, activeTab) {
           <div class="header-right">
             <a href="#" class="header-link" id="btn-help">Help</a>
             <div class="header-dropdown">
-              <a href="#" class="header-link">Preview and Test <span>▼</span></a>
+              <a href="#" class="header-link" id="btn-preview-email">Preview and Test <span>▼</span></a>
             </div>
             <button class="header-btn" id="btn-editor-settings">⚙️ Settings</button>
             <button class="header-btn" id="btn-save-template">Save as Template</button>
@@ -120,6 +122,7 @@ export function createEmailBuilderLayoutHTML(options, activeTab) {
           </div>
         </div>
       </div>
+      ${createEmailPreviewModalHTML()}
   `;
 }
 
