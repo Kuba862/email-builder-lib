@@ -43,8 +43,8 @@ export class DragAndDropHandler {
       e.stopPropagation();
       $(this).removeClass('drag-over');
 
-      // Jeśli drop nastąpił wewnątrz .container-children lub .column-children,
-      // zostaw obsługę handlerowi delegowanemu
+      // If the drop occurred inside .container-children or .column-children,
+      // leave the handling to the delegated handler
       const $target = $(e.target);
       if ($target.closest('.container-children').length || $target.closest('.column-children').length) {
         return;

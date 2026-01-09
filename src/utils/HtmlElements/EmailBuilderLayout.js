@@ -1,4 +1,5 @@
 import { createEmailPreviewModalHTML } from './EmailPreviewModal';
+import { createSaveTemplateModalHTML } from './SaveTemplateModal';
 
 export function createEmailBuilderLayoutHTML(options, activeTab) {
   return `
@@ -36,9 +37,25 @@ export function createEmailBuilderLayoutHTML(options, activeTab) {
             </div>
             
             <div class="sidebar-panel" id="sidebar-content-panel">
-              <div class="content-blocks-grid" id="content-blocks-grid">
-                <!-- Blocks will be rendered here -->
+              <!-- Templates Section -->
+              <div class="templates-section" id="templates-section" style="margin-bottom: 20px; border-bottom: 1px solid #ddd; padding-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                  <h4 style="margin: 0; font-size: 14px; font-weight: bold;">Saved Templates</h4>
+                  <button id="btn-refresh-templates" class="header-btn" style="padding: 4px 8px; font-size: 12px;" title="Refresh templates">🔄</button>
+                </div>
+                <div id="templates-list-container" style="max-height: 200px; overflow-y: auto;">
+                  <div class="templates-loading">Loading templates...</div>
+                </div>
               </div>
+              
+              <!-- Content Blocks Section -->
+              <div class="content-blocks-section">
+                <h4 style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold;">Content Blocks</h4>
+                <div class="content-blocks-grid" id="content-blocks-grid">
+                  <!-- Blocks will be rendered here -->
+                </div>
+              </div>
+              
               <div class="sidebar-help">
                 Need a refresher? <a href="#" id="btn-quick-tour">Take a quick tour.</a>
               </div>
@@ -123,6 +140,7 @@ export function createEmailBuilderLayoutHTML(options, activeTab) {
         </div>
       </div>
       ${createEmailPreviewModalHTML()}
+      ${createSaveTemplateModalHTML()}
   `;
 }
 

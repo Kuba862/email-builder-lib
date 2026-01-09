@@ -1,7 +1,29 @@
+# Dependencies
 node_modules/
-dist/
-.DS_Store
-*.log
-.idea/
-.vscode/
 package-lock.json
+
+# Build outputs
+dist/
+*.log
+
+# Environment files
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker volumes
+postgres_data/
+backend
+DOCKER_SETUP.md
+docker-compose.yml
+DATABASE_CONNECTION.md
+DOKUMENTACJA.md

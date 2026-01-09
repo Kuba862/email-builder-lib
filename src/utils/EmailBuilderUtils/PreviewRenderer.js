@@ -6,16 +6,31 @@ export class PreviewRenderer {
   }
 
   renderPreviewBlocks(document, blockId) {
+    console.log('PreviewRenderer.renderPreviewBlocks called with blockId:', blockId);
     const block = document[blockId];
-    if (!block) return '';
+    if (!block) {
+      console.warn('Block not found for blockId:', blockId);
+      return '';
+    }
+    
+    console.log('Block found:', { 
+      type: block.type, 
+      data: block.data,
+      childrenIds: block.data?.childrenIds,
+      childrenCount: block.data?.childrenIds?.length || 0
+    });
 
     const BlockClass = BlockRegistry.get(block.type);
-    if (!BlockClass) return '';
+    if (!BlockClass) {
+      console.warn('BlockClass not found for type:', block.type);
+      return '';
+    }
 
     // Add blockId to block data
     const blockData = { ...block.data, blockId: blockId };
     const blockInstance = new BlockClass(blockData);
     let html = blockInstance.render();
+    console.log('Block rendered HTML length:', html ? html.length : 0);
 
     // Special handling for Columns block - render children in columns
     if (block.type === 'Columns') {
@@ -53,21 +68,43 @@ export class PreviewRenderer {
     }
     // Render children if they exist (for Container and other blocks)
     else if (block.data && block.data.childrenIds && Array.isArray(block.data.childrenIds)) {
+      console.log(`Rendering ${block.data.childrenIds.length} children for block ${blockId}`);
       const childrenHtml = block.data.childrenIds
-        .map(childId => this.renderPreviewBlocks(document, childId))
+        .map(childId => {
+          console.log(`Rendering child block: ${childId}`);
+          return this.renderPreviewBlocks(document, childId);
+        })
         .join('');
 
-      // If no children and this is a container, show placeholder
-      if (childrenHtml === '' && block.type === 'Container' && blockId !== this.rootBlockId) {
-        html = html.replace('{{children}}', '<div class="container-empty-placeholder">Drag elements here</div>');
+      console.log(`Children HTML length: ${childrenHtml.length}`);
+
+      // If no children, show placeholder for Container blocks
+      if (block.data.childrenIds.length === 0 || childrenHtml === '') {
+        if (block.type === 'Container') {
+          if (blockId === this.rootBlockId) {
+            // Root container placeholder
+            html = html.replace('{{children}}', '<div class="container-empty-placeholder" style="padding: 20px; text-align: center; color: #999;">No content blocks yet. Drag blocks from the sidebar to add content.</div>');
+          } else {
+            // Regular container placeholder
+            html = html.replace('{{children}}', '<div class="container-empty-placeholder">Drag elements here</div>');
+          }
+        } else {
+          // For non-container blocks, just use empty string
+          html = html.replace('{{children}}', childrenHtml);
+        }
       } else {
         html = html.replace('{{children}}', childrenHtml);
       }
-    } else if (block.type === 'Container' && blockId !== this.rootBlockId) {
+    } else if (block.type === 'Container') {
       // Handle case where childrenIds doesn't exist
-      html = html.replace('{{children}}', '<div class="container-empty-placeholder">Drag elements here</div>');
+      if (blockId === this.rootBlockId) {
+        html = html.replace('{{children}}', '<div class="container-empty-placeholder" style="padding: 20px; text-align: center; color: #999;">No content blocks yet. Drag blocks from the sidebar to add content.</div>');
+      } else {
+        html = html.replace('{{children}}', '<div class="container-empty-placeholder">Drag elements here</div>');
+      }
     }
 
+    console.log(`Final HTML length for block ${blockId}: ${html.length}`);
     return html;
   }
 }

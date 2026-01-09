@@ -6,7 +6,23 @@ export class SidebarManager {
   }
 
   renderSidebar(blockId, block) {
+    // Validate inputs
+    if (!blockId || !block) {
+      console.warn('renderSidebar called with invalid parameters:', { blockId, block });
+      return;
+    }
+    
+    if (!block.type) {
+      console.warn('Block missing type property:', block);
+      return;
+    }
+    
     const BlockClass = BlockRegistry.get(block.type);
+    if (!BlockClass) {
+      console.warn('Block class not found for type:', block.type);
+      return;
+    }
+    
     const $sidebar = $('#sidebar-content');
     
     let html = `<h3>Edit: ${block.type}</h3>`;

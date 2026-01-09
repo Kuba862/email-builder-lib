@@ -21,7 +21,7 @@ export class EventHandler {
 
     $(this.container).on('click', '#btn-save-template', function(e) {
       e.preventDefault();
-      self.exportJSON();
+      self.openSaveTemplateModal();
     });
 
     $(this.container).on('click', '#btn-save-exit', function(e) {
@@ -92,6 +92,46 @@ export class EventHandler {
     $(this.container).on('click', '#btn-preview-refresh', function(e) {
       e.preventDefault();
       self.emailPreviewManager.refreshPreview();
+    });
+
+    // Save Template Modal
+    $(this.container).on('click', '#btn-save-template-modal-close, #btn-save-template-modal-cancel', function(e) {
+      e.preventDefault();
+      self.closeSaveTemplateModal();
+    });
+
+    $(this.container).on('click', '#btn-save-template-modal-save', function(e) {
+      e.preventDefault();
+      self.templateSaveManager.saveTemplate();
+    });
+
+    $(this.container).on('click', '#btn-save-template-modal-update', function(e) {
+      e.preventDefault();
+      self.templateSaveManager.updateTemplate();
+    });
+
+    $(this.container).on('click', '#btn-save-template-modal-save-as-new', function(e) {
+      e.preventDefault();
+      self.templateSaveManager.saveAsNew();
+    });
+
+    // Allow Enter key to save template
+    $(this.container).on('keypress', '#template-name, #template-description', function(e) {
+      if (e.which === 13 && e.ctrlKey) {
+        e.preventDefault();
+        self.templateSaveManager.saveTemplate();
+      }
+    });
+
+    // Refresh templates list
+    $(this.container).on('click', '#btn-refresh-templates', function(e) {
+      e.preventDefault();
+      self.loadTemplatesList();
+    });
+
+    // Refresh templates after successful save
+    $(this.container).on('templateSaved', function() {
+      self.loadTemplatesList();
     });
   }
 }
