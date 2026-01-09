@@ -17,7 +17,7 @@ export class ContainerBlock extends BaseBlock {
     const blockId = this.data.blockId || '';
     const isPreview = blockId && blockId !== 'root';
     
-    // Email-compatible table-based layout
+    // Email-compatible table-based layout - we use table to ensure that the container is always the same width
     const containerContent = `
       <table style="width: 100%; border-collapse: collapse; background-color: ${this.data.style?.backgroundColor || '#FFFFFF'};">
         <tr>

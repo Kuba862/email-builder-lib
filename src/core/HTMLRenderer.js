@@ -27,14 +27,14 @@ export class HTMLRenderer {
 
     // Special handling for Columns block - render children in columns
     if (block.type === 'Columns') {
-      // Upewnij się, że props istnieje
+      // Ensure that props exists
       if (!block.data.props) {
         block.data.props = { columns: 2 };
       }
       
       const columns = parseInt(block.data.props.columns) || 2;
       
-      // Upewnij się, że columnChildrenIds ma odpowiednią liczbę kolumn
+      // Ensure that columnChildrenIds has the correct number of columns
       if (!block.data.columnChildrenIds || block.data.columnChildrenIds.length !== columns) {
         const existingColumnChildrenIds = block.data.columnChildrenIds || [];
         block.data.columnChildrenIds = Array(columns).fill(null).map((_, i) => {

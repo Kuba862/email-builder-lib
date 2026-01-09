@@ -2,7 +2,7 @@ import { BaseBlock } from '../core/BaseBlock';
 
 export class ColumnsBlock extends BaseBlock {
   getDefaultData() {
-    const columns = 2; // Domyślna liczba kolumn
+    const columns = 2; // Default number of columns
     return {
       style: {
         padding: { top: 16, right: 0, bottom: 16, left: 0 }
@@ -12,7 +12,7 @@ export class ColumnsBlock extends BaseBlock {
         columnWidths: Array(columns).fill(null).map((_, i) => `${100 / columns}%`),
         gap: 16
       },
-      columnChildrenIds: Array(columns).fill(null).map(() => []) // Tablica tablic - każda kolumna ma swoją listę dzieci
+      columnChildrenIds: Array(columns).fill(null).map(() => []) // Array of arrays - each column has its own list of children
     };
   }
 
@@ -27,31 +27,31 @@ export class ColumnsBlock extends BaseBlock {
     const columnChildrenIds = this.data.columnChildrenIds || [];
     
     // Render columns - in emails we use table
-    // Gap jest dzielony między kolumnami: pierwsza kolumna ma padding tylko z prawej,
-    // ostatnia tylko z lewej, środkowe z obu stron
+    // Gap is divided between columns: the first column has padding only on the right,
+    // the last column only on the left, the middle ones have padding on both sides
     let columnsHtml = '';
     for (let i = 0; i < columns; i++) {
       const width = columnWidths[i] || `${100 / columns}%`;
       const columnId = `${blockId}-col-${i}`;
       
-      // Oblicz padding dla każdej kolumny
+      // Calculate padding for each column
       let paddingLeft = 0;
       let paddingRight = 0;
       
       if (columns === 1) {
-        // Jedna kolumna - brak gap
+        // One column - no gap
         paddingLeft = 0;
         paddingRight = 0;
       } else if (i === 0) {
-        // Pierwsza kolumna - padding tylko z prawej
+        // First column - padding only on the right
         paddingLeft = 0;
         paddingRight = gap / 2;
       } else if (i === columns - 1) {
-        // Ostatnia kolumna - padding tylko z lewej
+        // Last column - padding only on the left
         paddingLeft = gap / 2;
         paddingRight = 0;
       } else {
-        // Środkowe kolumny - padding z obu stron
+        // Middle columns - padding on both sides
         paddingLeft = gap / 2;
         paddingRight = gap / 2;
       }
